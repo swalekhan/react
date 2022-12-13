@@ -1,33 +1,50 @@
-// import logo from './logo.svg';
-import './App.css';
-import ExpenseItem from "./component/Expenses/ExpenseItem"
-import React from 'react';
-import ExpenseForm from './component/Expenses/ExpenseForm';
+import React, { useState } from 'react';
+
+import NewExpense from './components/NewExpense/NewExpense';
+import Expenses from './components/Expenses/Expenses';
+const dumy = [
+  {
+    id: 'e1',
+    title: 'Toilet Paper',
+    amount: 94.12,
+    date: new Date(2020, 7, 14),
+  },
+  { id: 'e2', title: 'New TV', amount: 799.49, date: new Date(2021, 2, 12) },
+  {
+    id: 'e3',
+    title: 'Car Insurance',
+    amount: 294.67,
+    date: new Date(2021, 2, 28),
+  },
+  {
+    id: 'e4',
+    title: 'New Desk (Wooden)',
+    amount: 450,
+    date: new Date(2021, 5, 12),
+  },
+];
 
 const App = () => {
+     const [expenses, setExpenses] = useState(dumy)
+  // return React.createElement(
+  //   'div',
+  //   {},
+  //   React.createElement('h2', {}, "Let's get started!"),
+  //   React.createElement(Expenses, { items: expenses })
+  // );
 
-  let expense = [
-    { title: "trip", amount: "10", date: new Date() },
-    { title: "shoping", amount: "100", date: new Date() },
-    { title: "food", amount: "50", date: new Date() }
-  ];
-   
-  const FormData =(data)=>{
-        expense.push(data);
-        console.log(data)
-        console.log(expense)
-  }
-   
+  const addExpenseHandler = expense => {
+   setExpenses((prevExpense)=>{
+    return [expense, ...prevExpense];
+   })
+  };
+
   return (
-     <div>
-       { expense.map((e) => {
-      return ( <div key={e.amount} >
-        <ExpenseItem title={e.title} amount={e.amount} date={e.date} />
-      </div> )})}
-
-    <ExpenseForm onFormData={FormData}/>
-     </div>
-  )
-  
+    <div>
+      <NewExpense onAddExpense={addExpenseHandler} />
+      <Expenses items={expenses} />
+    </div>
+  );
 }
+
 export default App;
