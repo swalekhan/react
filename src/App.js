@@ -2,6 +2,7 @@
 import './App.css';
 import ExpenseItem from "./component/Expenses/ExpenseItem"
 import React from 'react';
+import ExpenseForm from './component/Expenses/ExpenseForm';
 
 const App = () => {
   let expense = [
@@ -18,6 +19,7 @@ const App = () => {
       </div>
       )
     })}
+    <ExpenseForm/>
      </div>
   )
   
